@@ -12,7 +12,7 @@ Especially when I freeze my tuned vocals.
 This little utility allows you to save _50%_ of your memory just because you'll store one channel on your drive instead of two.
 
 ## Get started
-To get started, download the latest setup from [GitHub Releases](). Than install it and use.
+To get started, download the latest setup from [GitHub Releases](https://github.com/justfollowyourdreams/StMFC/releases). Than install it and use.
 
 To convert the file, just drop it into the utility's window *(works from Live's browser also)*, and then you'll get a file called **[OriginalName]_mono.wav**.
 Then just replace an old audio with new one.

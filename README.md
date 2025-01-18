@@ -1,7 +1,7 @@
 # __StMFC__ — Stereo to Mono Fast Converter.
 
 ---
-![StMFC screenshot](screenshot.png)
+![Showcase](showcase.gif)
 
 **StMFC** is a free software that helps you to convert your stereo WAV-files to mono in purpose of saving memory.
 
@@ -11,7 +11,7 @@ Especially when I freeze my tuned vocals.
 
 This little utility allows you to save _50%_ of your memory just because you'll store one channel on your drive instead of two.
 
-## Get started
+## Get started 🚀
 To get started, download the latest setup from [GitHub Releases](https://github.com/justfollowyourdreams/StMFC/releases). Than install it and use.
 
 To convert the file, just drop it into the utility's window *(works from Live's browser also)*, and then you'll get a file called **[OriginalName]_mono.wav**.
@@ -20,7 +20,7 @@ Then just replace an old audio with new one.
 
 There is no macOS version yet, so you have to build it by yourself.
 
-## Build
+## Build 🛠️
 For building from source, you need:
 - C and C++ compilers (I used [MinGW-w64](https://winlibs.com/)),
 - [CMake](https://cmake.org/) build system,

@@ -12,8 +12,9 @@ add_executable(StMFC WIN32 #COULD NOT WORK FOR OTHER OS
         src/StMFC_GUI.hpp
         src/exceptions.hpp
 )
-set(BUILD_EXAMPLES OFF FORCE)
-set(BUILD_PROGRAMS OFF FORCE)
+set(BUILD_EXAMPLES OFF CACHE BOOL "")
+set(BUILD_PROGRAMS OFF CACHE BOOL "")
+set(BUILD_TESTING OFF CACHE BOOL "")
 add_subdirectory(libsndfile)
 target_link_libraries(StMFC PRIVATE sndfile)
 

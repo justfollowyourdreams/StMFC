@@ -14,7 +14,7 @@ This little utility allows you to save _50%_ of your memory just because you'll 
 ## Get started 🚀
 To get started, download the latest setup from [GitHub Releases](https://github.com/justfollowyourdreams/StMFC/releases). Than install it and use.
 
-To convert the file, just drop it into the utility's window *(works from Live's browser also)*, and then you'll get a file called **[OriginalName]_mono.wav**.
+To convert a file, just drop it into the utility's window *(works from Live's browser also)*, and then you'll get a file called **[OriginalName]_mono.wav**.
 Then just replace an old audio with new one.
 *PROGRAM DOES NOT REMOVE ORIGINAL FILES! YOU HAVE TO DELETE IT MANUALLY!*
 
@@ -28,15 +28,16 @@ For building from source, you need:
 - a LOOOOOT of time.
 
 Install and prepare all of these and then follow the instruction:
-1. Open a new terminal in the project directory.
-2. Create CMake configuration: `cmake . -B"./build" -G"<GENERATOR>" -DCMAKE_TOOLCHAIN_FILE="<PATH_TO_VCPKG>/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=<SYSTEM_TRIPLET> -DVCPKG_HOST_TRIPLET=<SYSTEM_TRIPLET> -DCMAKE_BUILD_TYPE=RELEASE`
+1. Clone repo: `git clone --recursive https://github.com/justfollowyourdreams/StMFC.git`.
+2. Go to the project directory: `cd ./StMFC`.
+3. Create CMake configuration: `cmake . -B"./build" -G"<GENERATOR>" -DCMAKE_TOOLCHAIN_FILE="<PATH_TO_VCPKG>/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=<SYSTEM_TRIPLET> -DVCPKG_HOST_TRIPLET=<SYSTEM_TRIPLET> -DCMAKE_BUILD_TYPE=RELEASE`
 
     - `<GENERATOR>` — your build system's files (type `cmake --help` to see generators available for your OS).
     
     - `<PATH_TO_VCPKG>` — path to your vcpkg root *(example: `-DCMAKE_TOOLCHAIN_FILE="D:/vcpkg/scripts/buildsystems/vcpkg.cmake"`)*.
 
     - `<SYSTEM_TRIPLET>` — what to build libraries for. To see all of these, type `vcpkg help triplets`.
-3. Build program using `cmake --build ./build`.
+4. Build program using `cmake --build ./build`.
 
 Done! Build executable is located in **./build/bin** directory.
 

@@ -4,7 +4,7 @@ project(StMFC)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_executable(StMFC WIN32 #COULD NOT WORK FOR OTHER OS
+set(SOURCES
         src/main.cpp
         src/convert.cpp
         src/convert.hpp
@@ -12,6 +12,12 @@ add_executable(StMFC WIN32 #COULD NOT WORK FOR OTHER OS
         src/StMFC_GUI.hpp
         src/exceptions.hpp
 )
+if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    add_executable(StMFC ${SOURCES})
+else (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    add_executable(StMFC WIN32 ${SOURCES})
+endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+
 set(BUILD_EXAMPLES OFF CACHE BOOL "")
 set(BUILD_PROGRAMS OFF CACHE BOOL "")
 set(BUILD_TESTING OFF CACHE BOOL "")

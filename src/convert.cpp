@@ -1,40 +1,48 @@
+// Stolen and adapted from https://gist.github.com/nicolamontecchio/622276
+
 #include "convert.hpp"
 
 void convert(const std::string &path) {
-    SF_INFO inFileInfo;
-    SF_INFO outFileInfo;
-    SNDFILE *inFile = sf_open(path.c_str(), SFM_READ, &inFileInfo);
-    if (inFile == nullptr)
+    SNDFILE* sndfile;
+    SF_INFO sfinfo;
+    sndfile = sf_open(path.c_str(), SFM_READ, &sfinfo);
+    if (sndfile == nullptr)
         throw FileNotOpenedException(path);
-    else if (inFileInfo.channels != 2) {
-        sf_close(inFile);
+    else if (sfinfo.channels != 2) {
+        sf_close(sndfile);
         throw NotStereoException();
     }
-
-    float *inData = new float[inFileInfo.frames * 2];
-    float *outData = new float[inFileInfo.frames];
-    sf_readf_float(inFile, inData, inFileInfo.frames);
-    for (int e = 0; e < inFileInfo.frames; e++) {
-        for (int i = 0; i < 2; i++)
-            outData[e] += inData[e * 2 + i];
-        outData[e] /= 2;
+    float *audioIn = new float[sfinfo.channels * sfinfo.frames];
+    sf_read_float(sndfile, audioIn, sfinfo.channels * sfinfo.frames);
+    // mixdown
+    float *audioOut = new float[sfinfo.frames];
+    for(int i = 0; i < sfinfo.frames; i++)
+    {
+        audioOut[i] = 0;
+        for(int j = 0; j < sfinfo.channels; j++)
+            audioOut[i] += audioIn[i*sfinfo.channels + j];
+        audioOut[i] /= sfinfo.channels;
     }
-    outFileInfo = inFileInfo;
-    outFileInfo.channels = 1;
+    sf_close(sndfile);
+    // write output
+    int frames = sfinfo.frames;
+    sfinfo.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
+    sfinfo.channels = 1;
+
     std::string outName;
     outName = path.substr(0, path.length() - 4);
     outName.append("_mono.wav");
-    SNDFILE *outFile = sf_open(outName.c_str(), SFM_WRITE, &outFileInfo);
-    if (outFile == nullptr) {
-        sf_close(inFile);
-        sf_close(outFile);
-        delete[] inData;
-        delete[] outData;
+
+    sndfile = sf_open(outName.c_str(), SFM_WRITE, &sfinfo);
+    if (sndfile == nullptr) {
+        sf_close(sndfile);
+        delete[] audioIn;
+        delete[] audioOut;
         throw FileNotCreatedException(outName);
     }
-    sf_writef_float(outFile, outData, inFileInfo.frames);
-    delete[] inData;
-    delete[] outData;
-    sf_close(inFile);
-    sf_close(outFile);
+    sf_write_float(sndfile, audioOut, frames);
+    sf_close(sndfile);
+    // free memory
+    delete[] audioIn;
+    delete[] audioOut;
 }

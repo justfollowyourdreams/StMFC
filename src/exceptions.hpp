@@ -9,11 +9,6 @@ public:
     inline const char *what() { return "Provided file is not a stereo."; };
 };
 
-class NotWavException : public std::exception {
-public:
-    inline const char *what() { return "Provided file is not a wave file."; };
-};
-
 class FileNotCreatedException : public std::exception {
 private:
     std::string message;

@@ -12,6 +12,7 @@ void convert(const std::string &path) {
         sf_close(sndfile);
         throw NotStereoException();
     }
+
     float *audioIn = new float[sfinfo.channels * sfinfo.frames];
     sf_read_float(sndfile, audioIn, sfinfo.channels * sfinfo.frames);
     // mixdown
@@ -26,7 +27,6 @@ void convert(const std::string &path) {
     sf_close(sndfile);
     // write output
     int frames = sfinfo.frames;
-    sfinfo.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
     sfinfo.channels = 1;
 
     std::string outName;

@@ -3,3 +3,7 @@ cmake-build-release/
 .idea
 BUILDS-SETUPS/
 vcpkg_installed/
+.DS_Store
+conan_install/
+CMakeUserPresets.json
+build/

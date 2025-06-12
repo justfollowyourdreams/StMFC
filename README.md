@@ -18,27 +18,21 @@ To convert a file, just drop it into the utility's window *(works from Live's br
 Then just replace an old audio with new one.
 *PROGRAM DOES NOT REMOVE ORIGINAL FILES! YOU HAVE TO DELETE IT MANUALLY!*
 
-There is no macOS version yet, so you have to build it by yourself.
+macOS build provided was built on **x86_64 Intel Macbook**. AFAIK it could be run on M-chips Macs.
 
 ## Build 🛠️
 For building from source, you need:
 - C and C++ compilers (I used [MinGW-w64](https://winlibs.com/)),
 - [CMake](https://cmake.org/) build system,
-- [vcpkg](https://vcpkg.io/en/index.html) dependency manager,
-- a LOOOOOT of time.
+- [Conan](https://conan.io/) package manager.
 
 Install and prepare all of these and then follow the instruction:
+
+0. Prepare compiler and Conan *(you might need to run `conan profile detect`)*.
 1. Clone repo: `git clone --recursive https://github.com/justfollowyourdreams/StMFC.git`.
 2. Go to the project directory: `cd ./StMFC`.
-3. Create CMake configuration: `cmake . -B"./build" -G"<GENERATOR>" -DCMAKE_TOOLCHAIN_FILE="<PATH_TO_VCPKG>/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=<SYSTEM_TRIPLET> -DVCPKG_HOST_TRIPLET=<SYSTEM_TRIPLET> -DCMAKE_BUILD_TYPE=RELEASE`
+3. Install Conan in project: `conan install . -b=missing -sbuild_type=Release`.
+4. Run CMake: `cmake --preset conan-release`.
+5. Build the program: `cmake --build ./build/Release`.
 
-    - `<GENERATOR>` — your build system's files (type `cmake --help` to see generators available for your OS).
-    
-    - `<PATH_TO_VCPKG>` — path to your vcpkg root *(example: `-DCMAKE_TOOLCHAIN_FILE="D:/vcpkg/scripts/buildsystems/vcpkg.cmake"`)*.
-
-    - `<SYSTEM_TRIPLET>` — what to build libraries for. To see all of these, type `vcpkg help triplets`.
-4. Build program using `cmake --build ./build`.
-
-Done! Build executable is located in **./build/bin** directory.
-
-*If you have any issues on configuring, **use links provided by vcpkg in the command line.***
+Done! Built executable is located in **./build/Release/bin** directory.

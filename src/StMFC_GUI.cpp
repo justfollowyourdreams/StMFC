@@ -22,7 +22,7 @@ MainWindow::MainWindow() :
     Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnClose, this);
 
     std::ifstream ifs;
-    ifs.open("config.ini");
+    ifs.open(appPath + "/config.ini");
     if (ifs.is_open()) {
         int x, y;
         ifs >> x;
@@ -34,7 +34,7 @@ MainWindow::MainWindow() :
 
 void MainWindow::OnClose(wxCloseEvent &event) {
     std::ofstream ofs;
-    ofs.open("config.ini");
+    ofs.open(appPath + "/config.ini");
     ofs << std::to_string(this->GetPosition().x) << "\n" << std::to_string(this->GetPosition().y);
     ofs.close();
     TSFP->Destroy();

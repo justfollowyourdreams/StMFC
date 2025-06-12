@@ -15,7 +15,7 @@ set(SOURCES
 if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     add_executable(StMFC ${SOURCES})
 else (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-    add_executable(StMFC WIN32 ${SOURCES})
+    add_executable(StMFC ${SOURCES})
 endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
 set(BUILD_EXAMPLES OFF CACHE BOOL "")

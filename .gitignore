@@ -7,3 +7,4 @@ vcpkg_installed/
 conan_install/
 CMakeUserPresets.json
 build/
+.vscode/

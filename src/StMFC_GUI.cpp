@@ -1,4 +1,5 @@
 #include "StMFC_GUI.hpp"
+#include <string>
 
 bool StMFC_GUI::OnInit() {
     wxInitAllImageHandlers();
@@ -11,10 +12,12 @@ MainWindow::MainWindow() :
         wxFrame(nullptr, wxID_ANY, "StMFC",
                 wxPoint(100, 500), wxSize(220, 150),
                 (wxMINIMIZE_BOX | wxSYSTEM_MENU | wxCAPTION | wxCLOSE_BOX | wxSTAY_ON_TOP)) {
-    TSFP = new TheSingleOneFuckingPanel(this);
+    wxFileName f(wxStandardPaths::Get().GetExecutablePath());
+    this->appPath = f.GetPath().ToStdString();
+    TSFP = new TheSingleOneFuckingPanel(this, this->appPath);
     TSFP->DragAcceptFiles(true);
     this->SetClientSize(200, 100);
-    icon.LoadFile("StMFC_logo.png", wxBITMAP_TYPE_PNG);
+    icon.LoadFile(this->appPath + "/StMFC_logo.png", wxBITMAP_TYPE_PNG);
     this->SetIcon(icon);
     Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnClose, this);
 
@@ -38,8 +41,8 @@ void MainWindow::OnClose(wxCloseEvent &event) {
     this->Destroy();
 }
 
-TheSingleOneFuckingPanel::TheSingleOneFuckingPanel(wxFrame *parent) : wxPanel(parent) {
-    interfaceBitmap.LoadFile(wxT("StMFC_interface.png"), wxBITMAP_TYPE_PNG);
+TheSingleOneFuckingPanel::TheSingleOneFuckingPanel(wxFrame *parent, const std::string &appPath) : wxPanel(parent) {
+    interfaceBitmap.LoadFile(wxString(appPath + "/StMFC_interface.png"), wxBITMAP_TYPE_PNG);
 }
 
 void TheSingleOneFuckingPanel::paintEvent(wxPaintEvent &evt) {

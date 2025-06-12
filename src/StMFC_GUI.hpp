@@ -1,13 +1,16 @@
 #ifndef STMFC_GUI_HPP
 #define STMFC_GUI_HPP
 
+#include <string>
 #include <wx/wx.h>
+#include <wx/filename.h>
+#include <wx/stdpaths.h>
 #include <fstream>
 #include "convert.hpp"
 
 class TheSingleOneFuckingPanel : public wxPanel {
 public:
-    explicit TheSingleOneFuckingPanel(wxFrame *parent);
+    explicit TheSingleOneFuckingPanel(wxFrame *parent, const std::string &appPath);
 
 private:
     wxBitmap interfaceBitmap;
@@ -22,6 +25,8 @@ DECLARE_EVENT_TABLE()
 };
 
 class MainWindow : public wxFrame {
+private:
+    std::string appPath;
 public:
     MainWindow();
 
